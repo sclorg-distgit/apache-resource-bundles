@@ -8,7 +8,7 @@
 
 Name:		%{?scl_prefix}%{pkg_name}
 Version:	2
-Release:	11.10%{?dist}
+Release:	11.11%{?dist}
 Summary:	Apache Resource Bundles
 
 License:	ASL 2.0
@@ -22,13 +22,13 @@ Source5:	http://repo1.maven.org/maven2/org/apache/apache-incubator-disclaimer-re
 Source6:	http://repo1.maven.org/maven2/org/apache/apache-incubator-disclaimer-resource-bundle/%{id_version}/apache-incubator-disclaimer-resource-bundle-%{id_version}.pom
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-compiler-plugin
-BuildRequires:  maven30-maven-install-plugin
-BuildRequires:  maven30-maven-jar-plugin
-BuildRequires:  maven30-maven-remote-resources-plugin
-BuildRequires:  maven30-maven-resources-plugin
-BuildRequires:  maven30-maven-surefire-plugin
-BuildRequires:  maven30-maven-site-plugin
+BuildRequires:  %{?scl_prefix}maven-compiler-plugin
+BuildRequires:  %{?scl_prefix}maven-install-plugin
+BuildRequires:  %{?scl_prefix}maven-jar-plugin
+BuildRequires:  %{?scl_prefix}maven-remote-resources-plugin
+BuildRequires:  %{?scl_prefix}maven-resources-plugin
+BuildRequires:  %{?scl_prefix}maven-surefire-plugin
+BuildRequires:  %{?scl_prefix}maven-site-plugin
 
 BuildArch:	noarch
 
@@ -38,7 +38,7 @@ and notices for all Apache releases.
 
 %prep
 %setup -c -T -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 cp %SOURCE0 ./pom.xml
 
@@ -72,7 +72,7 @@ popd
 
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_file :apache-jar-resource-bundle apache-resource-bundles/jar
 %mvn_file :apache-license-header-resource-bundle apache-resource-bundles/license-header
@@ -81,7 +81,7 @@ set -e -x
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -91,6 +91,9 @@ set -e -x
 %{_javadir}/%{pkg_name}
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2-11.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 2-11.10
 - maven33 rebuild
 
