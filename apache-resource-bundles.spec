@@ -8,7 +8,7 @@
 
 Name:		%{?scl_prefix}%{pkg_name}
 Version:	2
-Release:	11.11%{?dist}
+Release:	11.12%{?dist}
 Summary:	Apache Resource Bundles
 
 License:	ASL 2.0
@@ -21,7 +21,7 @@ Source4:	http://repo1.maven.org/maven2/org/apache/apache-license-header-resource
 Source5:	http://repo1.maven.org/maven2/org/apache/apache-incubator-disclaimer-resource-bundle/%{id_version}/apache-incubator-disclaimer-resource-bundle-%{id_version}-sources.jar
 Source6:	http://repo1.maven.org/maven2/org/apache/apache-incubator-disclaimer-resource-bundle/%{id_version}/apache-incubator-disclaimer-resource-bundle-%{id_version}.pom
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}maven-compiler-plugin
 BuildRequires:  %{?scl_prefix}maven-install-plugin
 BuildRequires:  %{?scl_prefix}maven-jar-plugin
@@ -91,6 +91,9 @@ set -e -x
 %{_javadir}/%{pkg_name}
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 2-11.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2-11.11
 - maven33 rebuild #2
 
